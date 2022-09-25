@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>MY-BLOG</title>
+        <link rel="loadstatic" href="{% static 'CSS/base.css' %}">
+    </head>
+    <body>
+        <header>
+            <div class="nav-left">
+                <h1><a href="{% url 'home' %}">Django-blog</a></h1>
+            </div>
+            <div class="nav-right">
+               <a href="{% url 'post_new' %}">+New-post  </a>
+            </div>
+        </header>
+        {% if user.is_authenticated %}
+            <p> hi {{ user.username }}</p>
+            <p><a href="{% url 'logout' %}">LogOut</a></p>
+        {% else %}
+            <p>you are not loged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+        {% endif %}
+        <div>
+            {% block content %}
+            {% endblock content %} 
+        </div>
+    </body>
+</html>
